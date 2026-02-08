@@ -2,22 +2,24 @@ package de.dhbwka.java.exercise.control;
 
 public class ShoeSize {
     static void output(){
-        //Ausgabe von Tabellen-Head nur einmal
+
+        //Ausgabe von Tabellen-Head: nur einmal
         System.out.println("Zentimeter      |  Größe");
         System.out.println("----------------+--------");
 
-        //Festlegung globaler Variablen und Standardwerte
-        int size = 30;
-        double firstZentimeter = 19.33;
-        double secondZentimeter;
+        //20 Durchläufe der Schleife mit "wachsenden" Parametern und Berechnung/Rundung der Größe
+        for (int size = 30; size <= 49; size++) {
 
-        //20 Durchläufe der Schleife mit "wachsenden" Parametern und Berechnung/rundung der Zentimeter
-        for(int s = 30; s <= 49; s++) {
+            //Berechnung der beiden Größen
+            double firstCentimeter = (size - 1) / 1.5;
+            double secondCentimeter = size / 1.5;
 
-            //Runden funktioniert noch nicht ganz
-            secondZentimeter = Math.round(((size / 1.5)  * 100.0) / 100.0);
-            firstZentimeter = Math.round(((secondZentimeter - 2.0/3.0) * 100.0) / 100.0);
-            System.out.println(firstZentimeter + " - " + secondZentimeter + "    |  " + size++);
+            //Rundung
+            firstCentimeter = Math.round(firstCentimeter * 100.0) / 100.0;
+            secondCentimeter = Math.round(secondCentimeter * 100.0) / 100.0;
+
+            //Ausgabe mit zwei Nachkommastellen sowie entsprechender Formatierung/Leerzeichen
+            System.out.printf(" %.2f - %.2f  |  %d%n", firstCentimeter, secondCentimeter, size);
         }
     }
 
