@@ -1,38 +1,39 @@
 package de.dhbwka.java.exercise.arrays;
 import java.util.Scanner;
 
-//nicht fertig!
+//Aufgabe unklar, daher nicht final fertig
 
-public class Eratostenes {
+public class Eratosthenes {
 
     private static void sieve(){
         //Deklaration globaler Variablen & Arrays
         Scanner inputScanner = new Scanner(System.in);
-        float primes[] = {}; //leer, siehe Anweisung
 
         //Out- und Input
-        System.out.print("Welche Zahl möchtest du durch das Sieb des Eratostenes laufen lassen? ");
+        System.out.print("Welche Zahl möchtest du durch das Sieb des Eratosthenes laufen lassen? ");
         float n = inputScanner.nextFloat();
         int arrayInput = (int) n;
 
         //Größe des Arrays bestimmen
         float[] sieve = new float[arrayInput];
+        float[] primes = new float[arrayInput]; //sollte leer sein, Größe kann max. wie sieves sein, daher vorerst so groß wie sieves
 
         //kleinste Zahl in sieves finden
         int min = 0;
         for (int i = 2; i < sieve.length; i++) {
-            if (sieve[i]) {
+            if (sieve[i] < min) {
                 min = i;
                 break;
             }
         }
 
-        //Hinzufügen vom Minimum in primes
-        primes.add(min);
+        //Hinzufügen vom Minimum in primes auf index 0
+        primes[0] = min;
 
         //i aus sieves löschen
+        //habe hier keine andere Möglichkeit gefunden, daher alle Werte auf 0 setzen
         for (int i = min; i < sieve.length; i += min) {
-            sieve[i] = false;
+            sieve[i] = 0;
         }
 
         //Finalen Output
@@ -41,6 +42,8 @@ public class Eratostenes {
             System.out.print(sieve[i] + ", ");
         }
     }
+
+    //final Output?! Aufgabe nicht klar
 
     public static void main(String[] args) {
         sieve();
