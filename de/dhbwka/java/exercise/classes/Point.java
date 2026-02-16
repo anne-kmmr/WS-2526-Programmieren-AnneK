@@ -65,7 +65,7 @@ public class Point {
     }
 
     // Abstand/Berechnung zu einem anderen Punkt
-    public double getDistance(Point otherPoint) {
+    private double getDistance(Point otherPoint) {
         double dx = this.xCoordinate - otherPoint.xCoordinate;
         double dy = this.yCoordinate - otherPoint.yCoordinate;
         return Math.sqrt(dx * dx + dy * dy);

@@ -2,37 +2,40 @@ package de.dhbwka.java.exercise.classes;
 
 public class Account {
 
-    //Erstellung gloaber, privater Variablen
+    //Erstellung globaler, privater Variablen
     private int account;
     private String accountHolder;
     private int accountBalance;
+    private int payment;
     private int limit;
 
+    //Constructor mit globalen Variablen
     Account(int account, String accountHolder, int accountBalance, int limit) {
         this.account = account;
         this.accountHolder = accountHolder;
         this.accountBalance = accountBalance;
+        this.payment = payment;
         this.limit = limit;
     }
 
-    //Getter für Account
+    //Getter für den Account
     public int getAccount() {
-
+        return account;
     }
 
     //Getter für den Kontoinhaber
     public String getAccountHolder() {
-
+        return accountHolder;
     }
 
     //Getter für den Kontostand
     public int getAccountBalance() {
-
+        return accountBalance;
     }
 
     //Getter für das Limit
     public int getLimit() {
-
+        return limit;
     }
 
     //Setter für den Account
@@ -55,19 +58,57 @@ public class Account {
         this.limit = limit;
     }
 
-    //StringToString für die Ausgabe und Darstellung des Kontos
+    //Überprüfung vor ProcessDeposit/ProcessPayment, ob alles valide ist
+    //überprüfen
+    private boolean validityCheck(){
+        boolean SetCheckBackToTrue = true;
+
+        if (accountBalance < limit){
+            SetCheckBackToTrue = false;
+            return SetCheckBackToTrue;
+        }
+        else{
+            return SetCheckBackToTrue;
+        }
+    }
+
+    //überprüfen
+    //Fügt Guthaben zum Kontostand hinzu, je nachdem, ob
+    private void processDeposit(int payment) {
+        if(account < limit){
+            accountBalance = accountBalance + payment;
+            toString();
+        }
+        else {
+            toString();
+        }
+    }
+
+    //überprüfen
+    //Bucht Guthaben ab
+    private void processPayment(int payment) {
+        if(validityCheck()){
+            accountBalance = accountBalance - payment;
+            toString();
+        }
+        else {
+            toString();
+        }
+    }
+
+    //überprüfen
+    //StringToString für die Ausgabe und Darstellung des Kontos (siehe Beispielausgabe in main), je nachdem, ob Abbuchung valide ist oder nicht
     public String toString(){
-        //String-Ausgabe für Output/Main
+
+        if (!validityCheck()){
+            return "Deckung nicht ausreichend!\nKonto Nr. " + account + " (" + accountHolder + "), Stand: " + accountBalance + " ct, Limit: " + limit + " ct) ";
+        }
+        else{
+            return "Konto Nr. " + account + "(" + accountHolder + "), Stand:" + accountBalance + " ct, Limit " + limit + " ct) ";
+        }
     }
 
-    public void processDeposit(){
-        //Fügt Guthaben hinzu
-    }
-
-    public void processPayment(){
-        //Zieht Guthaben ab
-    }
-
+    //Main als Unittest
     public static void main(String[] args) {
         Account account = new Account(4711, "Donald Duck", 500, 1000);
         System.out.println(account);
@@ -78,6 +119,4 @@ public class Account {
         account.processPayment(2000);
         System.out.println(account);
     }
-
-
 }
