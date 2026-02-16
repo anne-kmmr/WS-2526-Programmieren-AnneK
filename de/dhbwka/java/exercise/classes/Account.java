@@ -59,52 +59,31 @@ public class Account {
     }
 
     //Überprüfung vor ProcessDeposit/ProcessPayment, ob alles valide ist
-    //überprüfen
-    private boolean validityCheck(){
-        boolean SetCheckBackToTrue = true;
-
-        if (accountBalance < limit){
-            SetCheckBackToTrue = false;
-            return SetCheckBackToTrue;
-        }
-        else{
-            return SetCheckBackToTrue;
-        }
+    private boolean validityCheck(int payment){
+        return (accountBalance - payment) >= -limit;
     }
 
-    //überprüfen
-    //Fügt Guthaben zum Kontostand hinzu, je nachdem, ob
+    //fügt Guthaben zum Kontostand hinzu, je nachdem, ob
     private void processDeposit(int payment) {
-        if(account < limit){
-            accountBalance = accountBalance + payment;
-            toString();
-        }
-        else {
-            toString();
-        }
+        accountBalance += payment;
     }
 
-    //überprüfen
     //Bucht Guthaben ab
     private void processPayment(int payment) {
-        if(validityCheck()){
-            accountBalance = accountBalance - payment;
-            toString();
-        }
-        else {
-            toString();
+        if(validityCheck(payment)){
+            accountBalance -= payment;
+        } else {
+            System.out.println("Deckung nicht ausreichend!");
         }
     }
 
-    //überprüfen
     //StringToString für die Ausgabe und Darstellung des Kontos (siehe Beispielausgabe in main), je nachdem, ob Abbuchung valide ist oder nicht
     public String toString(){
-
-        if (!validityCheck()){
+        if (!validityCheck(payment)){
             return "Deckung nicht ausreichend!\nKonto Nr. " + account + " (" + accountHolder + "), Stand: " + accountBalance + " ct, Limit: " + limit + " ct) ";
         }
         else{
-            return "Konto Nr. " + account + "(" + accountHolder + "), Stand:" + accountBalance + " ct, Limit " + limit + " ct) ";
+            return "Konto Nr. " + account + " (" + accountHolder + "), Stand: " + accountBalance + " ct, Limit: " + limit + " ct) ";
         }
     }
 
