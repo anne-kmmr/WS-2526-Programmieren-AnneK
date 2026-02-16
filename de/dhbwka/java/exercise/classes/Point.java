@@ -2,26 +2,34 @@ package de.dhbwka.java.exercise.classes;
 
 public class Point {
 
-    //globale Variablen erstellen
+    //globale, private Variablen erstellen
     private double xCoordinate;
     private double yCoordinate;
 
-    //Standard-Constructor mit Zuweisung von Wert 0 sowie Erstellung eines neuen Datentyps
+    //Standard-Constructor mit Zuweisung der Koordinaten
     public Point(double xCoordinate, double yCoordinate) {
-        xCoordinate = 0;
-        yCoordinate = 0;
-        Point point = new Point(xCoordinate, yCoordinate);   
+        this.xCoordinate = xCoordinate;
+        this.yCoordinate = yCoordinate;
     }
 
-    //funktioniert das? überarbeiten
-    public Point getPoint1(Point point, double xCoordinate, double yCoordinate) {
-        Point point1 = new Point(xCoordinate, yCoordinate);
-        return point1;
+    //Getter für X-Koordinate
+    public double getXCoordinate() {
+        return xCoordinate;
     }
 
-    public Point getPoint2(Point point, double xCoordinate, double yCoordinate) {
-        Point point2 = new Point(xCoordinate, yCoordinate);
-        return point2;
+    //Setter für X-Koordinate
+    public void setXCoordinate(double xCoordinate) {
+        this.xCoordinate = xCoordinate;
+    }
+
+    //Getter für Y-Koordinate
+    public double getYCoordinate() {
+        return yCoordinate;
+    }
+
+    //Setter für Y-Koordinate
+    public void setYCoordinate(double yCoordinate) {
+        this.yCoordinate = yCoordinate;
     }
 
     //Berechnung Abstand des Punktes zum Ursprung
@@ -43,51 +51,41 @@ public class Point {
     }
 
     //Spiegelung des Punktes am Ursprung
-    private double mirrorOrigin(){
-        getPoint1(xCoordinate, yCoordinate);
-        
+    private Point mirrorOrigin(){
+
+        //funktioniert das?
         if (xCoordinate == 0 || yCoordinate == 0){
-            return xCoordinate + yCoordinate;
+            //Wenn einer der Punkte null ist, wird kein zusätzliches Minus ausgegeben
+            return new Point(xCoordinate, yCoordinate);
         }
         else{
             //Punkte des Punktes A spiegeln und damit in den Minusbereich verschieben
-            xCoordinate = xCoordinate * (-1);
-            yCoordinate = yCoordinate * (-1);
-            setPoint1(xCoordinate,yCoordinate);
+            return new Point(-xCoordinate, -yCoordinate);
         }
     }
 
-    //Abstand zweier Punkte → Name verändert, da getter und Funktion ähnlich wären
-    private double Distance(Point point){
-        //Abstand berechnen mit A/gespiegelt A - B
-        //evtl. Zwischenspeichern von PunktA, bevor PunktB drankommt, danach Differenz berechnen
-        return 0;
-
+    // Abstand/Berechnung zu einem anderen Punkt
+    public double getDistance(Point otherPoint) {
+        double dx = this.xCoordinate - otherPoint.xCoordinate;
+        double dy = this.yCoordinate - otherPoint.yCoordinate;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
     //Funktion als Rückgabewert, der im Endeffekt einen String mittels System.out.printl zurückgibt
+    //(für Ausgaben von Punkte/gespiegelten Punkt)
     public String toString(){
-        //wird hier nicht benötigt, außer man möchte die doubles als string ausgeben?
+        return "Punkt (" + xCoordinate + "," + yCoordinate + ")";
     }
 
-    //umbauen! Setter am Ende von Funktionen aufrufen, um damit die Werte festzulegen, das geschieht
-    //aktuell noch nicht verwendet
-    public void setPoint1(double xCoordinate, double yCoordinate) {
-        
-    }
-
-    public void setPoint2(double xCoordinate, double yCoordinate) {
-
-    }
-
+    //Main als Test
     public static void main(String[] args) {
         Point pointA = new Point(4.0, 2.0);
         System.out.println("A: " + pointA);
         Point pointB = new Point(-1.0, -1.0);
         System.out.println("B: " + pointB);
-        System.out.println("Abstand A-B: "  + pointA.Distance(pointB));
+        System.out.println("Abstand A-B: "  + pointA.getDistance(pointB));
         pointA = pointA.mirrorOrigin();
         System.out.println("A': " + pointA);
-        System.out.println("Abstand A’-B: " + pointA.Distance(pointB));
+        System.out.println("Abstand A’-B: " + pointA.getDistance(pointB));
     }
 }
