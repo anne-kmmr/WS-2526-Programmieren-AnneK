@@ -1,30 +1,24 @@
-package de.dhbwka.java.exercise.classes.SpielGUI;
-
-//Import von Random und JFrame
+package de.dhbwka.java.exercise.classes.SpielTerminal;
+import de.dhbwka.java.exercise.classes.SpielGUI.Spielfeld;
 
 import java.util.Random;
-import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class Wechselspiel {
-
-    //Konstruktor
-    Wechselspiel() {
-        //
-    }
-
-    //getter und setter
-
+    static Random random = new Random();
 
     private static void ErstellungFeld() {
-        // 8 zufällige Farben generieren
-        String[] Farben = new String[7];
-        Random random = new Random();
-        for (int i = 0; i < Farben.length; i++) {
-            int farbe = random.nextInt(0xFFFFFF + 1);
-            Farben[i] = String.format("#%06X", farbe);
-        }
+        String[] Farben = new String[] {
+                "#FF0000", // Rot
+                "#00FF00", // Grün
+                "#0000FF", // Blau
+                "#FFFF00", // Gelb
+                "#FF00FF", // Magenta
+                "#00FFFF", // Cyan
+                "#FFA500"  // Orange
+        };
 
         // JFrame erstellen
         JFrame frame = new JFrame("Buntes Spielfeld");
@@ -67,7 +61,7 @@ public class Wechselspiel {
     static void main(){
         ErstellungFeld();
 
-        Spielfeld spielfeld = new Spielfeld(9, 9, 7);
+        de.dhbwka.java.exercise.classes.SpielGUI.Spielfeld spielfeld = new Spielfeld(9, 9, 7);
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

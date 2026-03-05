@@ -1,4 +1,4 @@
-package de.dhbwka.java.exercise.classes;
+package de.dhbwka.java.exercise.classes.SpielGUI;
 
 import java.util.*;
 
@@ -202,6 +202,15 @@ public class Spielfeld {
     public int getPunkte() {
         return punkte;
     }
+
+    public int getFarbe(int r, int c) {
+        if (r >= 0 && r < zeilen && c >= 0 && c < spalten) {
+            return feld[r][c];
+        } else {
+            throw new IndexOutOfBoundsException("Ungültige Zellkoordinaten");
+        }
+    }
+
 
     public void ausgeben() {
 

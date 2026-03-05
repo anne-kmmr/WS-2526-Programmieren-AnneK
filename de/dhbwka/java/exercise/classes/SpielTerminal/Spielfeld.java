@@ -1,6 +1,6 @@
-package de.dhbwka.java.exercise.classes.SpielGUI;
+package de.dhbwka.java.exercise.classes.SpielTerminal;
 
-import java.util.*;
+import java.util.Random;
 
 public class Spielfeld {
 
