@@ -1,1 +1,0 @@
-WS25/26: Kurs "Programmieren"
